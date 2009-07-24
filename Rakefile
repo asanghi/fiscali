@@ -7,9 +7,10 @@ begin
     gem.name = "fiscali"
     gem.summary = %Q{Fiscal Year Date Functions}
     gem.email = "aditya.sanghi@risingsunbilling.com"
-    gem.homepage = "http://github.com/asanghi/fiscali"
+    gem.homepage = "http://asanghi.github.com/fiscali"
     gem.authors = ["Aditya Sanghi"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency('activesupport')
   end
 
 rescue LoadError

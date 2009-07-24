@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
      "test/fiscali_test.rb",
      "test/test_helper.rb"
   ]
-  s.homepage = %q{http://github.com/asanghi/fiscali}
+  s.homepage = %q{http://asanghi.github.com/fiscali}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
@@ -42,8 +42,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
     else
+      s.add_dependency(%q<activesupport>, [">= 0"])
     end
   else
+    s.add_dependency(%q<activesupport>, [">= 0"])
   end
 end
