@@ -1,7 +1,0 @@
-= fiscali
-
-Add extra methods to your Date and Time classes to allow for fiscal/financial year calculations (depending on your zone!)
-
-== Copyright
-
-Copyright (c) 2009 asanghi. See LICENSE for details.
