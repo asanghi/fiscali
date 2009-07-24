@@ -26,6 +26,7 @@ module RisingSun
       end
 
       def fy_start_month=(month)
+      	write_inheritable_attribute(:zone, nil)
         write_inheritable_attribute(:start_month,month)
       end
     end
