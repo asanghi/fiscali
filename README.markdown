@@ -108,6 +108,7 @@ Assume Date.today is 1st May 2009
 
 * financial_quarter
   Returns Q1, Q2, Q3, Q4 depending on where the date falls
+	
     Date.today.financial_quarter
     => Q1
     Date.today.beginning_of_year.financial_quarter
@@ -115,6 +116,7 @@ Assume Date.today is 1st May 2009
   
 * financial_half
   Returns H1, H2 depending on where the date falls
+  
     Date.today.financial_half
     => H1
     Date.today.beginning_of_year.financial_half
@@ -122,16 +124,19 @@ Assume Date.today is 1st May 2009
   
 * next_financial_quarter
   Takes you to the beginning of the next financial quarter
+
     Date.today.next_financial_quarter
     => 1st July 2009
     
 * next_financial_half
   Takes you to the beginning of the next financial half
+
     Date.today.next_financial_half
     => 1st October 2009
 
 * beginning_of_financial_quarter
   Take you to the beginning of the current financial quarter
+
     Date.today.beginning_of_financial_quarter
     => 1st April 2009
     Date.today.beginning_of_year.beginning_of_financial_quarter
@@ -139,6 +144,7 @@ Assume Date.today is 1st May 2009
 
 * beginning_of_financial_half
   Take you to the beginning of the current financial half
+
     Date.today.beginning_of_financial_half
     => 1st April 2009
     Date.today.beginning_of_year.beginning_of_financial_quarter
@@ -146,6 +152,7 @@ Assume Date.today is 1st May 2009
 
 * previous_financial_quarter
   Take you to the beginning of the previous financial quarter
+
     Date.today.previous_financial_quarter
     => 1st Jan 2009
     Date.today.beginning_of_year.previous_financial_quarter
@@ -153,6 +160,7 @@ Assume Date.today is 1st May 2009
 
 * previous_financial_half
   Take you to the beginning of the previous financial half
+
     Date.today.previous_financial_half
     => 1st Oct 2008
     Date.today.beginning_of_year.previous_financial_quarter
