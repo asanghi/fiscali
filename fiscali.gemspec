@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fiscali}
-  s.version = "1.1.2"
+  s.version = "1.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aditya Sanghi"]
@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.email = %q{aditya.sanghi@risingsunbilling.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.markdown"
   ]
   s.files = [
     ".document",
      ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.markdown",
      "Rakefile",
      "VERSION",
      "fiscali.gemspec",
