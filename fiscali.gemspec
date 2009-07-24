@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fiscali}
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["asanghi"]
+  s.authors = ["Aditya Sanghi"]
   s.date = %q{2009-07-24}
   s.email = %q{aditya.sanghi@risingsunbilling.com}
   s.extra_rdoc_files = [
