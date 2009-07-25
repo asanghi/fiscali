@@ -9,6 +9,10 @@ class FiscaliTest < ActiveSupport::TestCase
     assert_equal(Date.fy_start_month,2)
 
     Date.fiscal_zone = :india
+    
+    d = Date.financial_year_start(2009)
+    assert_equal(d,Date.new(2009,4,1),'Financial Year start not correct')
+
     d = Date.new(2009,1,1)
     assert_equal(d.financial_year,2008,'Financial Year is not correct')
     assert_equal(d.beginning_of_financial_year,Date.new(2008,4,1),'Beginning of FY is not correct')

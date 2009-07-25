@@ -29,6 +29,10 @@ module RisingSun
       	write_inheritable_attribute(:zone, nil)
         write_inheritable_attribute(:start_month,month)
       end
+     
+      def financial_year_start(year=Date.today.year)
+        Date.new(year,fy_start_month,1)
+      end
     end
 
     module InstanceMethods
