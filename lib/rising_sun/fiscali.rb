@@ -117,6 +117,14 @@ module RisingSun
         beginning_of_financial_half.months_ago(6)
       end
 
+      def financial_month_of(month)
+        if month < start_month
+          Date.new(year+1,month,1) 
+        else
+          Date.new(year,month,1) 
+        end
+      end
+ 
       private
 
       def months_between
