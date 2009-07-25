@@ -18,7 +18,7 @@ module RisingSun
       end
 
       def fy_start_month
-        read_inheritable_attribute(:start_month)
+        read_inheritable_attribute(:start_month) || FY_START_MONTH
       end
 
       def fiscal_zone
@@ -33,6 +33,11 @@ module RisingSun
       def financial_year_start(year=Date.today.year)
         Date.new(year,fy_start_month,1)
       end
+      
+      def financial_months
+        (1..12).map{|m| ((m - 1 + fy_start_month)%12.1).ceil }
+      end
+
     end
 
     module InstanceMethods
