@@ -20,7 +20,7 @@ Fiscali provides ONE thing:
 
 It's easy to get up and running. Update your config/environment.rb file with this gem
 
-    config.gem "fiscali"
+    config.gem "asanghi-fiscali", :lib => 'fiscali', :sources => 'http://gems.github.com'
 
 Next step is to provide your Date/Time class your start zone. Stick this in an initializer file. (If you didnt understand that, put it in $ENV[RAILS_ROOT]/config/initializers/fiscali.rb)
 
