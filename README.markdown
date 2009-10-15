@@ -13,14 +13,14 @@ Fiscali provides ONE thing:
 
 ## Installing
 
-    # Install the gem:
-    sudo gem install asanghi-fiscali
+    # Install the gem (from gemcutter.org):
+    sudo gem install fiscali
     
 ## Using in your Rails project
 
 It's easy to get up and running. Update your config/environment.rb file with this gem
 
-    config.gem "asanghi-fiscali", :lib => 'fiscali', :sources => 'http://gems.github.com'
+    config.gem "fiscali"
 
 Next step is to provide your Date/Time class your start zone. Stick this in an initializer file. (If you didnt understand that, put it in $ENV[RAILS_ROOT]/config/initializers/fiscali.rb)
 
