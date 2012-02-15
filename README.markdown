@@ -22,6 +22,10 @@ It's easy to get up and running. Update your config/environment.rb file with thi
 
     config.gem "fiscali"
 
+In newer Rails projects, include the gem in the Gemfile and run "bundle install" to install the gem.
+
+    gem "fiscali"
+
 Next step is to provide your Date/Time class your start zone. Stick this in an initializer file. (If you didnt understand that, put it in $ENV[RAILS_ROOT]/config/initializers/fiscali.rb)
 
     Date.fiscal_zone = :india
