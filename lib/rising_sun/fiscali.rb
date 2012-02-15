@@ -2,9 +2,6 @@ module RisingSun
   module Fiscali
     def self.included(base)
       base.extend ClassMethods
-      unless included_modules.include? InstanceMethods
-        base.send(:include, InstanceMethods)
-      end
     end
 
     FISCAL_ZONE = {:india => 4, :uk => 4, :us => 10, :pakistan => 7,
@@ -12,26 +9,28 @@ module RisingSun
     FY_START_MONTH = 1
 
     module ClassMethods
+      mattr_accessor :fiscali_zone, :fiscali_start_month
+
       def fiscal_zone=(zone)
-        write_inheritable_attribute(:start_month, FISCAL_ZONE[zone] || FY_START_MONTH)
-        write_inheritable_attribute(:zone,zone)
+        self.fiscali_start_month = FISCAL_ZONE[zone] || FY_START_MONTH
+        self.fiscali_zone = zone
       end
 
       def fy_start_month
-        read_inheritable_attribute(:start_month) || FY_START_MONTH
+        fiscali_start_month || FY_START_MONTH
       end
 
       def fiscal_zone
-        read_inheritable_attribute(:zone)
+        fiscali_zone
       end
 
       def fy_start_month=(month)
-      	write_inheritable_attribute(:zone, nil)
-        write_inheritable_attribute(:start_month,month)
+        self.fiscali_zone = nil
+        self.fiscali_start_month = month
       end
      
-      def financial_year_start(year=Date.today.year)
-        Date.new(year,fy_start_month,1)
+      def financial_year_start(year=::Date.today.year)
+        ::Date.new(year,fy_start_month,1)
       end
       
       def financial_months
@@ -119,9 +118,9 @@ module RisingSun
 
       def financial_month_of(month)
         if month < start_month
-          Date.new(year+1,month,1) 
+          ::Date.new(year+1,month,1) 
         else
-          Date.new(year,month,1) 
+          ::Date.new(year,month,1) 
         end
       end
  
@@ -133,7 +132,7 @@ module RisingSun
       end
 
       def start_month
-        self.class.read_inheritable_attribute(:start_month) || FY_START_MONTH
+        self.class.fy_start_month || FY_START_MONTH
       end
 
     end
