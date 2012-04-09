@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Fiscali by asanghi</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/asanghi/fiscali">Fork Me on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Fiscali</h1>
+            <h2>Fiscal Year Date Functions</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/asanghi/fiscali/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/asanghi/fiscali/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+      <span class="banner-fix"></span>
+
+      <section id="main_content">
+        <h1>Fiscali: Fiscal Year based calculations</h1>
+
+<p>Fiscali provides ONE thing:</p>
+
+<ul>
+<li>Additional methods on your Date and Time classes to jump around dates in your Financial Year.</li>
+<li>Not sure it's a point to be said, but YES, you can specify your financial year zone and if you dont know your zone, just provide the first month your financial year to the Date/Time class.</li>
+</ul><h2>Quick Links</h2>
+
+<ul>
+<li><a href="http://wiki.github.com/asanghi/fiscali">Wiki</a></li>
+<li><a href="http://github.com/asanghi/fiscali/issues">Bugs</a></li>
+<li><a href="http://pledgie.org/campaigns/5400">Donate</a></li>
+</ul><h2>Installing</h2>
+
+<pre><code># Install the gem (from gemcutter.org):
+sudo gem install fiscali
+</code></pre>
+
+<h2>Using in your Rails project</h2>
+
+<p>In Rails, include the gem in the Gemfile and run "bundle" to install the gem.</p>
+
+<pre><code>gem "fiscali"
+</code></pre>
+
+<p>Next step is to provide your Date/Time class your start zone. Stick this in an initializer file. (If you didnt understand that, put it in $ENV[RAILS_ROOT]/config/initializers/fiscali.rb)</p>
+
+<pre><code>Date.fiscal_zone = :india
+Time.fiscal_zone = :india
+</code></pre>
+
+<p>or</p>
+
+<pre><code>Date.start_month = 4
+</code></pre>
+
+<h3>Default options</h3>
+
+<p>By default, the financial year start in January. (Correct me but thats not a common start of financial year!)
+Known Zones are  -
+        {:india =&gt; 4, :uk =&gt; 4, :us =&gt; 10, :pakistan =&gt; 7,
+         :australia =&gt; 7, :ireland =&gt; 1, :nz =&gt; 7, :japan =&gt; 4}</p>
+
+<h2>Date or Time Class Methods</h2>
+
+<pre><code>Date.fy_start_month
+=&gt; 1
+Date.fiscal_zone = :india
+=&gt; :india
+Date.fy_start_month
+=&gt; 4
+Date.fiscal_zone
+=&gt; :india
+Date.fy_start_month = 7
+=&gt; 7
+Date.fy_start_month
+=&gt; 7
+Date.fiscal_zone
+=&gt; nil
+</code></pre>
+
+<p>If you want to add your own fiscal zone</p>
+
+<pre><code>RisingSun::Fiscali::FISCAL_ZONE.merge!(:my_own_zone =&gt; 2)
+</code></pre>
+
+<p>should do the trick.</p>
+
+<h2>Date or Time Instance Methods</h2>
+
+<pre><code>Date.fiscal_zone = :india
+=&gt; :india
+Date.fy_start_month
+=&gt; 4
+</code></pre>
+
+<p>Indian Fiscal Year starts from 1st of April
+Assume Date.today is 1st May 2009</p>
+
+<h5>financial_year -&gt; Returns the financial year of the date/time</h5>
+
+<pre><code>Date.today.financial_year
+=&gt; 2009
+Date.today.beginning_of_year.financial_year
+=&gt; 2008
+</code></pre>
+
+<p>Since 1st Jan 2009 in India falls in the 2008-09 financial year</p>
+
+<h5>beginning_of_financial_year -&gt; Returns the beginning of financial year</h5>
+
+<pre><code>Date.today.beginning_of_financial_year
+=&gt; 1st April 2009
+Date.today.beginning_of_year.beginning_of_financial_year
+=&gt; 1st April 2008
+</code></pre>
+
+<h5>end_of_financial_year</h5>
+
+<h5>beginning_of_financial_q1</h5>
+
+<h5>end_of_financial_q1</h5>
+
+<h5>beginning_of_financial_q2</h5>
+
+<h5>end_of_financial_q2</h5>
+
+<h5>beginning_of_financial_q3</h5>
+
+<h5>end_of_financial_q3</h5>
+
+<h5>beginning_of_financial_q4</h5>
+
+<h5>end_of_financial_q4</h5>
+
+<h5>beginning_of_financial_h1</h5>
+
+<h5>end_of_financial_h1</h5>
+
+<h5>beginning_of_financial_h2</h5>
+
+<h5>end_of_financial_h2</h5>
+
+<h5>financial_quarter -&gt; Returns Q1, Q2, Q3, Q4 depending on where the date falls</h5>
+
+<pre><code>Date.today.financial_quarter
+=&gt; Q1
+Date.today.beginning_of_year.financial_quarter
+=&gt; Q4
+</code></pre>
+
+<h5>financial_half -&gt; Returns H1, H2 depending on where the date falls</h5>
+
+<pre><code>Date.today.financial_half
+=&gt; H1
+Date.today.beginning_of_year.financial_half
+=&gt; H2
+</code></pre>
+
+<h5>next_financial_quarter -&gt; Takes you to the beginning of the next financial quarter</h5>
+
+<pre><code>Date.today.next_financial_quarter
+=&gt; 1st July 2009
+</code></pre>
+
+<h5>next_financial_half -&gt; Takes you to the beginning of the next financial half</h5>
+
+<pre><code>Date.today.next_financial_half
+=&gt; 1st October 2009
+</code></pre>
+
+<h5>beginning_of_financial_quarter -&gt; Takes you to the beginning of the current financial quarter</h5>
+
+<pre><code>Date.today.beginning_of_financial_quarter
+=&gt; 1st April 2009
+Date.today.beginning_of_year.beginning_of_financial_quarter
+=&gt; 1st Jan 2009
+</code></pre>
+
+<h5>beginning_of_financial_half -&gt; Takes you to the beginning of the current financial half</h5>
+
+<pre><code>Date.today.beginning_of_financial_half
+=&gt; 1st April 2009
+Date.today.beginning_of_year.beginning_of_financial_quarter
+=&gt; 1st Oct 2008
+</code></pre>
+
+<h5>previous_financial_quarter -&gt; Takes you to the beginning of the previous financial quarter</h5>
+
+<pre><code>Date.today.previous_financial_quarter
+=&gt; 1st Jan 2009
+Date.today.beginning_of_year.previous_financial_quarter
+=&gt; 1st Oct 2008
+</code></pre>
+
+<h5>previous_financial_half -&gt; Takes you to the beginning of the previous financial half</h5>
+
+<pre><code>Date.today.previous_financial_half
+=&gt; 1st Oct 2008
+Date.today.beginning_of_year.previous_financial_quarter
+=&gt; 1st Apr 2008
+</code></pre>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/asanghi">asanghi</a> can be found on <a href="https://github.com/asanghi/fiscali">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
