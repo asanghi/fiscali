@@ -11,21 +11,21 @@ module RisingSun
     module ClassMethods
 
       def fiscal_zone=(zone)
-        Thread.current[:fiscali_start_month] = FISCAL_ZONE[zone] || FY_START_MONTH
-        Thread.current[:fiscali_zone] = zone
+        @fiscali_start_month = FISCAL_ZONE[zone] || FY_START_MONTH
+        @fiscali_zone = zone
       end
 
       def fy_start_month
-        Thread.current[:fiscali_start_month] || FY_START_MONTH
+        @fiscali_start_month || FY_START_MONTH
       end
 
       def fiscal_zone
-        Thread.current[:fiscali_zone]
+        @fiscali_zone
       end
 
       def fy_start_month=(month)
-        Thread.current[:fiscali_zone] = nil
-        Thread.current[:fiscali_start_month] = month
+        @fiscali_zone = nil
+        @fiscali_start_month = month
       end
      
       def financial_year_start(year=Date.today.year)
