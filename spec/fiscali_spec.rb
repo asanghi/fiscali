@@ -87,4 +87,11 @@ describe "fiscali" do
 
   end
 
+  it "should not rely on app being single threaded" do
+    Date.fiscal_zone = :india
+    thread = Thread.new { Thread.current["my_fiscal_zone"] = Date.fiscal_zone }
+    thread.join
+    thread["my_fiscal_zone"].should == :india
+  end
+
 end
