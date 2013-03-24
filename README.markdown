@@ -33,15 +33,30 @@ Next step is to provide your Date/Time class your start zone. Stick this in an i
 or
     Date.start_month = 4
     
+you can also determine the default for Year Forward by adding this to the same initializer file:
+
+    # Options are :yes or :no
+    Date.use_forward_year = :yes
+    Time.use_forward_year = :yes
+or
+    Date.fy_forward = 1
+
+Year Forward refers to the standard name for a fiscal year. For example:
+* If FY 2008 spans 2008 - 2009, set to :no or don't include in initializer file.
+* If FY 2008 spans 2007 - 2008, set to :yes in initializer file.
 
 ### Default options
 
-By default, the financial year start in January. (Correct me but thats not a common start of financial year!)
+By default, the financial year start in January. (Correct me, but thats not a common start of financial year!)
 Known Zones are  -
-    	{:india => 4, :uk => 4, :us => 10, :pakistan => 7,
-         :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
+
+    {:india => 4, :uk => 4, :us => 10, :pakistan => 7, :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
+
+By default, the Year Forward option is set to no, meaning the term FY 2008 spans 2008-2009 years.
 
 ## Date or Time Class Methods
+
+### Fiscal Zone and FY Start Month
     
     Date.fy_start_month
     => 1
@@ -57,6 +72,22 @@ Known Zones are  -
     => 7
     Date.fiscal_zone
     => nil
+    
+### Year Forward (Assume Date.today is 1st May 2009 and the fy_start_month = 4)
+
+    Date.fy_forward
+    => 0
+    Date.today.financial_year
+    => 2009
+
+    Date.use_forward_year = :yes
+    => :yes
+    Date.today.financial_year
+    => 2010
+    Date.fy_forward
+    => 1
+
+    
 
 If you want to add your own fiscal zone
 
