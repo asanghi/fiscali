@@ -8,6 +8,8 @@ module RisingSun
                    :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
     FY_START_MONTH = 1
     
+    FORWARD_YEAR = 0 # 0 -> FY08 = { 2008-2009 }, 1 -> FY08 = { 2007-2008 }
+    
     module ClassMethods
 
       def fiscal_zone=(zone)
@@ -39,7 +41,11 @@ module RisingSun
     end
 
     def financial_year
-      self.month < start_month ? self.year - 1 : self.year
+      if FORWARD_YEAR == 1
+        self.month < start_month ? self.year : self.year + 1
+      else
+        self.month < start_month ? self.year - 1 : self.year
+      end
     end
 
     def beginning_of_financial_year
