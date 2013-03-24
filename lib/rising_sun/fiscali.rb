@@ -64,7 +64,7 @@ module RisingSun
     # End Chiperific contribution
 
     def financial_year
-      if FORWARD_YEAR == 1
+      if @use_forward_year == 1
         self.month < start_month ? self.year : self.year + 1
       else
         self.month < start_month ? self.year - 1 : self.year
