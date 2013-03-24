@@ -8,7 +8,10 @@ module RisingSun
                    :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
     FY_START_MONTH = 1
     
-    FORWARD_YEAR = 0 # 0 -> FY08 = { 2008-2009 }, 1 -> FY08 = { 2007-2008 }
+    # Chiperific contribution
+    USE_FORWARD_YEAR = {:no => 0, :yes => 1} # 0 -> FY08 = { 2008-2009 }, 1 -> FY08 = { 2007-2008 }
+    FY_FORWARD = 0 
+    # End Chiperific contribution
     
     module ClassMethods
 
@@ -39,6 +42,26 @@ module RisingSun
       end
 
     end
+      
+    # Chiperific contribution
+    def use_forward_year=(bool)
+      @fy_forward = USE_FORWARD_YEAR[bool] || FORWARD_YEAR
+      @use_forward_year = bool
+    end
+    
+    def fy_forward
+      @fy_forward || FY_FORWARD
+    end
+    
+    def use_forward_year
+      @use_forward_year
+    end
+    
+    def fy_forward=(bool)
+      @use_forward_year = nil
+      @fy_forward = bool
+    end
+    # End Chiperific contribution
 
     def financial_year
       if FORWARD_YEAR == 1
