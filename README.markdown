@@ -15,7 +15,7 @@ Fiscali provides ONE thing:
 
     # Install the gem (from gemcutter.org):
     sudo gem install fiscali
-    
+
 ## Using in your Rails project
 
 It's easy to get up and running. Update your config/environment.rb file with this gem
@@ -32,14 +32,16 @@ Next step is to provide your Date/Time class your start zone. Stick this in an i
     Time.fiscal_zone = :india
 or
     Date.start_month = 4
-    
+
 you can also determine the default for Year Forward by adding this to the same initializer file:
 
-    # Options are true / false
-    Date.use_forward_year = true
-    Time.use_forward_year = true
-or
-    Date.fy_forward = true
+    Date.use_forward_year!
+    Time.use_forward_year!
+
+or if you wish to revert back to the default
+
+    Date.reset_forward_year!
+    Time.reset_forward_year!
 
 Year Forward refers to the standard name for a fiscal year. For example:
 * If FY 2008 spans 2008 - 2009, set to false or don't include in initializer file.
@@ -57,7 +59,7 @@ By default, the Year Forward option is set to false, meaning the term FY 2008 sp
 ## Date or Time Class Methods
 
 ### Fiscal Zone and FY Start Month
-    
+
     Date.fy_start_month
     => 1
     Date.fiscal_zone = :india
@@ -72,22 +74,22 @@ By default, the Year Forward option is set to false, meaning the term FY 2008 sp
     => 7
     Date.fiscal_zone
     => nil
-    
+
 ### Year Forward (Assume Date.today is 1st May 2009 and the fy_start_month = 4)
 
-    Date.fy_forward
-    => 0
+    Date.uses_forward_year?
+    => false
     Date.today.financial_year
     => 2009
 
-    Date.use_forward_year = true
+    Date.use_forward_year!
     => true
     Date.today.financial_year
     => 2010
-    Date.fy_forward
-    => 1
+    Date.uses_forward_year?
+    => true
 
-    
+
 
 If you want to add your own fiscal zone
 
@@ -101,11 +103,11 @@ should do the trick.
     => :india
     Date.fy_start_month
     => 4
-    
+
 Indian Fiscal Year starts from 1st of April
 Assume Date.today is 1st May 2009
 
- 
+
 ##### financial_year -> Returns the financial year of the date/time
     Date.today.financial_year
     => 2009
@@ -140,24 +142,24 @@ Assume Date.today is 1st May 2009
 ##### end_of_financial_h2
 
 ##### financial_quarter -> Returns Q1, Q2, Q3, Q4 depending on where the date falls
-	
+
     Date.today.financial_quarter
     => Q1
     Date.today.beginning_of_year.financial_quarter
     => Q4
-  
+
 ##### financial_half -> Returns H1, H2 depending on where the date falls
-  
+
     Date.today.financial_half
     => H1
     Date.today.beginning_of_year.financial_half
     => H2
-  
+
 ##### next_financial_quarter -> Takes you to the beginning of the next financial quarter
 
     Date.today.next_financial_quarter
     => 1st July 2009
-    
+
 ##### next_financial_half -> Takes you to the beginning of the next financial half
 
     Date.today.next_financial_half
@@ -190,16 +192,16 @@ Assume Date.today is 1st May 2009
     => 1st Oct 2008
     Date.today.beginning_of_year.previous_financial_quarter
     => 1st Apr 2008
-    
-
-    
 
 
 
-  
-  
 
 
-  
- 
- 
+
+
+
+
+
+
+
+

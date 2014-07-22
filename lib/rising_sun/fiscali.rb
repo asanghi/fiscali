@@ -3,14 +3,11 @@ module RisingSun
     def self.included(base)
       base.extend ClassMethods
     end
-    
+
     FISCAL_ZONE = {:india => 4, :uk => 4, :us => 10, :pakistan => 7,
                    :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
     FY_START_MONTH = 1
-    
-    USE_FORWARD_YEAR = {true, false} # false -> FY08 = { 2008-2009 }, true -> FY08 = { 2007-2008 }
-    FY_FORWARD = false
-    
+
     module ClassMethods
 
       def fiscal_zone=(zone)
@@ -30,37 +27,31 @@ module RisingSun
         @fiscali_zone = nil
         @fiscali_start_month = month
       end
-     
+
       def financial_year_start(year=Date.today.year)
         new(year,fy_start_month,1)
       end
-      
+
       def financial_months
         (1..12).map{|m| ((m - 1 + fy_start_month)%12.1).ceil }
       end
 
-    end
-      
-    def use_forward_year=(bool)
-      @fy_forward = USE_FORWARD_YEAR[bool] || FY_FORWARD
-      @use_forward_year = bool
-    end
-    
-    def fy_forward
-      @fy_forward || FY_FORWARD
-    end
-    
-    def use_forward_year
-      @use_forward_year
-    end
-    
-    def fy_forward=(bool)
-      @use_forward_year = nil
-      @fy_forward = bool
+      def use_forward_year!
+        @fy_forward = true
+      end
+
+      def reset_forward_year!
+        @fy_forward = false
+      end
+
+      def uses_forward_year?
+        @fy_forward || false
+      end
+
     end
 
     def financial_year
-      if @use_forward_year
+      if self.class.uses_forward_year?
         self.month < start_month ? self.year : self.year + 1
       else
         self.month < start_month ? self.year - 1 : self.year
@@ -141,12 +132,12 @@ module RisingSun
 
     def financial_month_of(month)
       if month < start_month
-        Date.new(year+1,month,1) 
+        Date.new(year+1,month,1)
       else
-        Date.new(year,month,1) 
+        Date.new(year,month,1)
       end
     end
- 
+
     private
 
     def months_between
