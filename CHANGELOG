@@ -1,0 +1,14 @@
+v2.2.0
+======
+
+* Added forward year support
+
+By default the financial year is reported as the year in which the financial year starts. e.g. 2008-09 is reported as 2008.
+However, some countries it is reported as 2008-09 is reported as 2009. You can now make this setting using
+
+Date.use_forward_year! and report the currently set as Date.uses_forward_year?
+The value can be reset using Date.reset_forward_year!
+
+* Added Changelog
+
+* Added Contributors
