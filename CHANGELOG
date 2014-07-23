@@ -1,3 +1,8 @@
+v2.2.1
+=======
+
+* Bugfix relating to uses_forward_year. Date calculations should remain the same. Only the reported year should change. (Thanks @reger Rob Eger)
+
 v2.2.0
 ======
 

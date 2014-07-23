@@ -59,7 +59,8 @@ module RisingSun
     end
 
     def beginning_of_financial_year
-      change(:year => financial_year, :month => start_month, :day => 1)
+      year = self.class.uses_forward_year? ? financial_year - 1 : financial_year
+      change(:year => year, :month => start_month, :day => 1)
     end
 
     def end_of_financial_year

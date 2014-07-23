@@ -44,6 +44,12 @@ describe "fiscali" do
       @d = Date.new(2009,4,1)
       @d.financial_year.should eql(2010)
     end
+
+    it "should report the correct beginning_of_financial_year when forward year is set" do
+      Date.use_forward_year!
+      @d = Date.new(2009,6,1)
+      @d.beginning_of_financial_year.should eql(Date.new(2009,4,1))
+    end
   end
 
   context "should report correct date field" do
