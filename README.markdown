@@ -196,10 +196,9 @@ Assume Date.today is 1st May 2009
 
 ## Contributors
 
-@asanghi
-@chiperific
-Rachel Shallit
-
+* @chiperific
+* @rshallit
+* @asanghi
 
 
 
