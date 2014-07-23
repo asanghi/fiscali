@@ -13,16 +13,11 @@ Fiscali provides ONE thing:
 
 ## Installing
 
-    # Install the gem (from gemcutter.org):
     sudo gem install fiscali
 
 ## Using in your Rails project
 
-It's easy to get up and running. Update your config/environment.rb file with this gem
-
-    config.gem "fiscali"
-
-In newer Rails projects, include the gem in the Gemfile and run "bundle install" to install the gem.
+In Rails projects, include the gem in the Gemfile and run "bundle install" to install the gem.
 
     gem "fiscali"
 
@@ -75,7 +70,7 @@ By default, the Year Forward option is set to false, meaning the term FY 2008 sp
     Date.fiscal_zone
     => nil
 
-### Year Forward (Assume Date.today is 1st May 2009 and the fy_start_month = 4)
+#### Year Forward (Assume Date.today is 1st May 2009 and the fy_start_month = 4)
 
     Date.uses_forward_year?
     => false
@@ -196,16 +191,7 @@ Assume Date.today is 1st May 2009
 
 ## Contributors
 
-* @chiperific
-* @rshallit
-* @asanghi
-
-
-
-
-
-
-
-
-
+* [@chiperific](https://github.com/chiperific)
+* [@rshallit](https://github.com/rshallit)
+* [@asanghi](https://github.com/asanghi)
 
