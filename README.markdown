@@ -139,9 +139,9 @@ Assume Date.today is 1st May 2009
 ##### financial_quarter -> Returns Q1, Q2, Q3, Q4 depending on where the date falls
 
     Date.today.financial_quarter
-    => Q1
+    => Q1 2009
     Date.today.beginning_of_year.financial_quarter
-    => Q4
+    => Q4 2009
 
 ##### financial_half -> Returns H1, H2 depending on where the date falls
 
@@ -160,12 +160,23 @@ Assume Date.today is 1st May 2009
     Date.today.next_financial_half
     => 1st October 2009
 
-##### beginning_of_financial_quarter -> Takes you to the beginning of the current financial quarter
+##### beginning_of_financial_quarter -> Takes you to the beginning of a quarter in the current financial year (defaults to current quarter)
 
     Date.today.beginning_of_financial_quarter
     => 1st April 2009
     Date.today.beginning_of_year.beginning_of_financial_quarter
     => 1st Jan 2009
+    Date.today.beginning_of_financial_quarter(3)
+    => 1st July 2009
+
+##### end_of_financial_quarter -> Takes you to the end of a quarter in the current financial year (defaults to current quarter)
+
+    Date.today.end_of_financial_quarter
+    => 30th June 2009
+    Date.today.beginning_of_year.end_of_financial_quarter
+    => 31st March 2009
+    Date.today.end_of_financial_quarter(3)
+    => 30th September 2009
 
 ##### beginning_of_financial_half -> Takes you to the beginning of the current financial half
 
