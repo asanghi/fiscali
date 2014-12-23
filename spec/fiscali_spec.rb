@@ -54,8 +54,10 @@ describe "fiscali" do
 
   context "should report correct date field" do
     before(:each) do
+      Date.fiscal_zone = :india
       @d = Date.new(2009,1,1)
     end
+
     it "should report correct financial year" do
       @d.financial_year.should eql(2008)
     end
@@ -81,6 +83,15 @@ describe "fiscali" do
       @d.end_of_financial_q2.should eql(Date.new(2008,9,30))
       @d.end_of_financial_q3.should eql(Date.new(2008,12,31))
       @d.end_of_financial_q4.should eql(Date.new(2009,3,31))
+
+      Date.fiscal_zone = :us 
+
+      @d.end_of_financial_h1.should eql(Date.new(2009,3,31))
+      @d.end_of_financial_h2.should eql(Date.new(2009,9,30))
+      @d.end_of_financial_q1.should eql(Date.new(2008,12,31))
+      @d.end_of_financial_q2.should eql(Date.new(2009,3,31))
+      @d.end_of_financial_q3.should eql(Date.new(2009,6,30))
+      @d.end_of_financial_q4.should eql(Date.new(2009,9,30))
     end
 
     it "should report financial quarters" do
@@ -114,6 +125,33 @@ describe "fiscali" do
       Date.new(2009,10,30).previous_financial_quarter.should eql(Date.new(2009,7,1))
     end
 
+  end
+
+  context "should report correct timestamp" do
+    before(:each) do
+      Time.fiscal_zone = :india
+      @t = Time.new(2009,1,1,12,1,1)
+    end
+
+    it "should report beginning of year/half/quarter with timestamp at beginning of day" do
+      @t.beginning_of_financial_year.should eql(Time.new(2008,4,1,0,0,0))
+      @t.beginning_of_financial_h1.should eql(Time.new(2008,4,1,0,0,0))
+      @t.beginning_of_financial_h2.should eql(Time.new(2008,10,1,0,0,0))
+      @t.beginning_of_financial_q1.should eql(Time.new(2008,4,1,0,0,0))
+      @t.beginning_of_financial_q2.should eql(Time.new(2008,7,1,0,0,0))
+      @t.beginning_of_financial_q3.should eql(Time.new(2008,10,1,0,0,0))
+      @t.beginning_of_financial_q4.should eql(Time.new(2009,1,1,0,0,0))
+    end
+
+    it "should report end of year/half/quarter with timestamp at end of day" do
+      @t.end_of_financial_year.should eql(Time.new(2009,3,31).end_of_day)
+      @t.end_of_financial_h1.should eql(Time.new(2008,9,30).end_of_day)
+      @t.end_of_financial_h2.should eql(Time.new(2009,3,31).end_of_day)
+      @t.end_of_financial_q1.should eql(Time.new(2008,6,30).end_of_day)
+      @t.end_of_financial_q2.should eql(Time.new(2008,9,30).end_of_day)
+      @t.end_of_financial_q3.should eql(Time.new(2008,12,31).end_of_day)
+      @t.end_of_financial_q4.should eql(Time.new(2009,3,31).end_of_day)
+    end
   end
 
   it "should not rely on app being single threaded" do

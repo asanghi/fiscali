@@ -60,38 +60,17 @@ module RisingSun
 
     def beginning_of_financial_year
       year = self.class.uses_forward_year? ? financial_year - 1 : financial_year
-      change(:year => year, :month => start_month, :day => 1)
+      change(:year => year, :month => start_month, :day => 1).beginning_of_month
     end
 
     def end_of_financial_year
       (beginning_of_financial_year + 1.year - 1.month).end_of_month
     end
 
-    alias :beginning_of_financial_q1 :beginning_of_financial_year
-    def end_of_financial_q1
-      end_of_financial_year - 9.months
+    (1..4).each do |q|
+      define_method("beginning_of_financial_q#{q}"){ beginning_of_financial_quarter q }
+      define_method("end_of_financial_q#{q}"){ end_of_financial_quarter q }
     end
-
-    def beginning_of_financial_q2
-      beginning_of_financial_year + 3.months
-    end
-
-    def end_of_financial_q2
-      end_of_financial_year - 6.months
-    end
-
-    def beginning_of_financial_q3
-      beginning_of_financial_year + 6.months
-    end
-
-    def end_of_financial_q3
-      end_of_financial_year - 3.months
-    end
-
-    def beginning_of_financial_q4
-      beginning_of_financial_year + 9.months
-    end
-    alias :end_of_financial_q4 :end_of_financial_year
 
     alias :beginning_of_financial_h1 :beginning_of_financial_year
     alias :end_of_financial_h1 :end_of_financial_q2
@@ -115,8 +94,14 @@ module RisingSun
       beginning_of_financial_year.months_since(((months_between / 6).floor + 1) * 6)
     end
 
-    def beginning_of_financial_quarter
-      beginning_of_financial_year.months_since(((months_between / 3).floor) * 3)
+    def beginning_of_financial_quarter(quarter = nil)
+      quarter = (months_between / 3).floor + 1 unless quarter.in? 1..4
+      beginning_of_financial_year.advance(months: (quarter - 1) * 3).beginning_of_month
+    end
+
+    def end_of_financial_quarter(quarter = nil)
+      quarter = (months_between / 3).floor + 1 unless quarter.in? 1..4
+      beginning_of_financial_year.advance(months: quarter * 3 - 1).end_of_month
     end
 
     def beginning_of_financial_half
@@ -149,6 +134,5 @@ module RisingSun
     def start_month
       self.class.fy_start_month || FY_START_MONTH
     end
-
   end
 end
