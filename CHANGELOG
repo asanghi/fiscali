@@ -1,3 +1,9 @@
+v2.3.0
+=======
+
+* Bugfix end_of_quarter, allow for timestamp types, ability to get quarters using one method
+* more tests
+
 v2.2.1
 =======
 

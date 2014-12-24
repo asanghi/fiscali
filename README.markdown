@@ -202,6 +202,7 @@ Assume Date.today is 1st May 2009
 
 ## Contributors
 
+* [@reed](https://github.com/reed)
 * [@chiperific](https://github.com/chiperific)
 * [@rshallit](https://github.com/rshallit)
 * [@asanghi](https://github.com/asanghi)
