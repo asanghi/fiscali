@@ -29,7 +29,7 @@ module RisingSun
       end
 
       def financial_year_start(year=Date.today.year)
-        new(year,fy_start_month,1)
+        uses_forward_year? ? new(year - 1,fy_start_month,1) : new(year,fy_start_month,1)
       end
 
       def financial_months
