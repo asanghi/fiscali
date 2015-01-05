@@ -50,6 +50,15 @@ describe "fiscali" do
       @d = Date.new(2009,6,1)
       expect(@d.beginning_of_financial_year).to eql(Date.new(2009,4,1))
     end
+
+    it "should report financial year start" do
+      Date.fiscal_zone = :india
+      Date.use_forward_year!
+      this_year = Date.today.year
+      Date.financial_year_start.should eql(Date.new(this_year-1,4,1))
+
+      Date.financial_year_start(2009).should eql(Date.new(2008,4,1))
+    end
   end
 
   context "should report correct date field" do
