@@ -1,55 +1,67 @@
 # Fiscali: Fiscal Year based calculations
 
-Fiscali provides ONE thing:
+Fiscali provides methods on your Date and Time classes to jump around dates in your Financial Year.
 
- * Additional methods on your Date and Time classes to jump around dates in your Financial Year.
- * Not sure it's a point to be said, but YES, you can specify your financial year zone and if you dont know your zone, just provide the first month your financial year to the Date/Time class.
+You can specify your financial year zone and if you don’t know your zone, just provide the month your financial year begins.
 
 ## Quick Links
 
- * [Wiki](http://wiki.github.com/asanghi/fiscali)
- * [Bugs](http://github.com/asanghi/fiscali/issues)
- * [Donate](http://pledgie.org/campaigns/5400)
+ * [Wiki](https://github.com/asanghi/fiscali/wiki)
+ * [Bugs](https://github.com/asanghi/fiscali/issues)
+ * [Donate](https://pledgie.org/campaigns/5400)
 
 ## Installing
 
-    sudo gem install fiscali
+    gem install fiscali
 
 ## Using in your Rails project
 
-In Rails projects, include the gem in the Gemfile and run "bundle install" to install the gem.
+In Rails projects, include Fiscali in the Gemfile, and run `bundle install` to install the gem:
 
-    gem "fiscali"
+    gem 'fiscali'
 
-Next step is to provide your Date/Time class your start zone. Stick this in an initializer file. (If you didnt understand that, put it in $ENV[RAILS_ROOT]/config/initializers/fiscali.rb)
+Next, create an initializer for configuration Fiscali:
+
+    config/initializers/fiscali.rb
+
+Either provide your Date/Time class your start zone:
 
     Date.fiscal_zone = :india
-    Time.fiscal_zone = :india
-or
-    Date.start_month = 4
 
-you can also determine the default for Year Forward by adding this to the same initializer file:
+Or if set the exact start month—for example, April:
+
+    Date.fy_start_month = 4
+
+You can also determine the default for Year Forward by adding this to the same initializer file:
 
     Date.use_forward_year!
     Time.use_forward_year!
 
-or if you wish to revert back to the default
+To revert back to the default:
 
     Date.reset_forward_year!
     Time.reset_forward_year!
 
-Year Forward refers to the standard name for a fiscal year. For example:
-* If FY 2008 spans 2008 - 2009, set to false or don't include in initializer file.
-* If FY 2008 spans 2007 - 2008, set to true in initializer file.
+“Year Forward” refers to the standard name for a fiscal year. For example:
+
+* If FY 2008 spans 2008–2009, set to false or don’t include in initializer file.
+* If FY 2008 spans 2007–2008, set to true in initializer file.
+
+Note that for every configuration you make, you will need to make it to every class (Date, Time, and DateTime) independently. For example:
+
+    Date.fiscal_zone = :india
+    Time.fiscal_zone = :india
+    DateTime.fiscal_zone = :india
 
 ### Default options
 
-By default, the financial year start in January. (Correct me, but thats not a common start of financial year!)
-Known Zones are  -
+By default, the financial year start in January.
 
-    {:india => 4, :uk => 4, :us => 10, :pakistan => 7, :australia => 7, :ireland => 1, :nz => 7, :japan => 4}
+Supported zones are:
 
-By default, the Year Forward option is set to false, meaning the term FY 2008 spans 2008-2009 years.
+    { india: 4, uk: 4, us: 10, pakistan: 7, australia: 7, ireland: 1, nz: 7, japan: 4}
+
+By default, the year forward is false, meaning the term FY 2008 spans 2008–2009 years.
 
 ## Date or Time Class Methods
 
@@ -84,8 +96,6 @@ By default, the Year Forward option is set to false, meaning the term FY 2008 sp
     Date.uses_forward_year?
     => true
 
-
-
 If you want to add your own fiscal zone
 
     RisingSun::Fiscali::FISCAL_ZONE.merge!(:my_own_zone => 2)
@@ -102,15 +112,17 @@ should do the trick.
 Indian Fiscal Year starts from 1st of April
 Assume Date.today is 1st May 2009
 
-
 ##### financial_year -> Returns the financial year of the date/time
+
     Date.today.financial_year
     => 2009
     Date.today.beginning_of_year.financial_year
     => 2008
- Since 1st Jan 2009 in India falls in the 2008-09 financial year
+
+Since 1st Jan 2009 in India falls in the 2008-09 financial year
 
 ##### beginning_of_financial_year -> Returns the beginning of financial year
+
     Date.today.beginning_of_financial_year
     => 1st April 2009
     Date.today.beginning_of_year.beginning_of_financial_year
@@ -199,11 +211,9 @@ Assume Date.today is 1st May 2009
     Date.today.beginning_of_year.previous_financial_quarter
     => 1st Apr 2008
 
-
 ## Contributors
 
 * [@reed](https://github.com/reed)
 * [@chiperific](https://github.com/chiperific)
 * [@rshallit](https://github.com/rshallit)
 * [@asanghi](https://github.com/asanghi)
-
