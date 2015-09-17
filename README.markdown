@@ -199,7 +199,6 @@ Assume Date.today is 1st May 2009
     Date.today.beginning_of_year.previous_financial_quarter
     => 1st Apr 2008
 
-
 ## Contributors
 
 * [@reed](https://github.com/reed)
@@ -207,3 +206,6 @@ Assume Date.today is 1st May 2009
 * [@rshallit](https://github.com/rshallit)
 * [@asanghi](https://github.com/asanghi)
 
+## License
+
+Fiscali is released under the [MIT License](http://www.opensource.org/licenses/MIT).

@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Fiscal Year Date Functions}
   gem.summary       = %q{Fiscal Year Date Functions}
   gem.homepage      = "https://github.com/asanghi/fiscali"
+  gem.license       = 'MIT'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
@@ -20,4 +21,3 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 2.8'
 end
-
