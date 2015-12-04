@@ -51,7 +51,9 @@ module RisingSun
     end
 
     def financial_year
-      if self.class.uses_forward_year?
+      if start_month == 1
+        self.year
+      elsif self.class.uses_forward_year?
         self.month < start_month ? self.year : self.year + 1
       else
         self.month < start_month ? self.year - 1 : self.year
