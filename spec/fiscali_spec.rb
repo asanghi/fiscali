@@ -160,4 +160,26 @@ describe "fiscali" do
     thread.join
     expect(thread['my_fiscal_zone']).to eql(:india)
   end
+
+  context "when the start month is January" do
+    around :each do |example|
+      old_fy_start_month = Date.fy_start_month
+      Date.fy_start_month = 1
+      @date = Date.new(2014, 1, 1)
+      example.run
+      Date.fy_start_month = old_fy_start_month
+    end
+
+    it "returns the date's year as the financial year" do
+      expect(@date.financial_year).to eql(2014)
+    end
+
+    context "when using forward year" do
+      it "returns the date's year as the financial year" do
+        Date.use_forward_year!
+        expect(@date.financial_year).to eql(2014)
+        Date.reset_forward_year!
+      end
+    end
+  end
 end
