@@ -51,7 +51,7 @@ module RisingSun
     end
 
     def financial_year
-      if start_month == 1
+      if january_start_month?
         self.year
       elsif self.class.uses_forward_year?
         self.month < start_month ? self.year : self.year + 1
@@ -61,8 +61,7 @@ module RisingSun
     end
 
     def beginning_of_financial_year
-      year = self.class.uses_forward_year? ? financial_year - 1 : financial_year
-      change(:year => year, :month => start_month, :day => 1).beginning_of_month
+      change(:year => year_of_financial_year_beginning, :month => start_month).beginning_of_month
     end
 
     def end_of_financial_year
@@ -127,6 +126,18 @@ module RisingSun
     end
 
     private
+
+    def year_of_financial_year_beginning
+      if self.class.uses_forward_year? && !january_start_month?
+        financial_year - 1
+      else
+        financial_year
+      end
+    end
+
+    def january_start_month?
+      start_month == 1
+    end
 
     def months_between
       soy = self.beginning_of_financial_year

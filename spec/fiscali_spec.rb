@@ -175,10 +175,22 @@ describe "fiscali" do
     end
 
     context "when using forward year" do
-      it "returns the date's year as the financial year" do
+      around :each do |example|
         Date.use_forward_year!
-        expect(@date.financial_year).to eql(2014)
+        example.run
         Date.reset_forward_year!
+      end
+
+      it "returns the date's year as the financial year" do
+        expect(@date.financial_year).to eql(2014)
+      end
+
+      it "returns the date itself as the beginning_of_financial_year" do
+        expect(@date.beginning_of_financial_year).to eql(@date)
+      end
+
+      it "returns the date itself as the end_of_financial_year" do
+        expect(@date.end_of_financial_year).to eql(Date.new(2014, 12, 31))
       end
     end
   end
