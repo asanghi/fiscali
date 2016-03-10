@@ -124,7 +124,18 @@ describe "fiscali" do
       expect(Date.new(2009,6,1).previous_financial_half).to eql(Date.new(2008,10,1))
       expect(Date.new(2009,10,30).previous_financial_quarter).to eql(Date.new(2009,7,1))
     end
+  end
 
+  context 'when date is end of month' do
+    before do
+      Date.fiscal_zone = :india
+      @d = Date.new(2009, 3, 31)
+    end
+
+    it "should report correct beginning and of financial year" do
+      expect(@d.beginning_of_financial_year).to eql(Date.new(2008,4,1))
+      expect(@d.end_of_financial_year).to eql(Date.new(2009,3,31))
+    end
   end
 
   context "should report correct timestamp" do

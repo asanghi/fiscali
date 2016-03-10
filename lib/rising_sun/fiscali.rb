@@ -61,7 +61,7 @@ module RisingSun
     end
 
     def beginning_of_financial_year
-      change(:year => year_of_financial_year_beginning, :month => start_month).beginning_of_month
+      change(:year => year_of_financial_year_beginning, :month => start_month, :day => 1).beginning_of_month
     end
 
     def end_of_financial_year
