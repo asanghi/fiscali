@@ -125,21 +125,21 @@ module RisingSun
       end
     end
 
-    def calendar_year(date)
-      if Date.uses_forward_year?
-        if date.month >= Date.fy_start_month
-          date.financial_year
-        else
-          date.financial_year - 1
-        end
+  def calendar_year_for_fiscal_date(the_date, the_month)
+    if Date.uses_forward_year?
+      if the_month >= Date.fy_start_month
+        the_date.financial_year - 1
       else
-        if date.month >= Date.fy_start_month
-          date.financial_year + 1
-        else
-          date.financial_year
-        end
+        the_date.financial_year
+      end
+    else
+      if the_month >= Date.fy_start_month
+        the_date.financial_year
+      else
+        the_date.financial_year + 1
       end
     end
+  end
 
     private
 
