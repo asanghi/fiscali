@@ -63,6 +63,53 @@ Supported zones are:
 
 By default, the year forward is false, meaning the term FY 2008 spans 2008–2009 years.
 
+### Setting financial years on a per-request basis
+
+If your Rails app has customers from many countries, you probably want to let them use the financial year for their country. You could do this by adding this method somewhere:
+
+```ruby
+# https://github.com/asanghi/fiscali
+class Fiscali
+  def self.country_to_fiscal_zone(country)
+    case country
+    when "United Kingdom"
+      :uk
+    when "New Zealand"
+      :nz
+    when "India"
+      :india
+    when "Pakistan"
+      :pakistan
+    when "Australia"
+      :australia
+    when "United States"
+      :us
+    when "Japan"
+      :japan
+    when "Ireland"
+      :ireland
+    else
+      nil # fiscali will default to January
+    end
+  end
+end
+```
+
+Then, add an `around_action` to your `ApplicationController`:
+
+```ruby
+  def set_fiscal_zone
+    old_fiscal_zone = Date.fiscal_zone
+    if user_signed_in?
+      zone = Fiscali.country_to_fiscal_zone(current_user.country)
+      Date.fiscal_zone = Time.fiscal_zone = zone
+    end
+    yield
+  ensure
+    Date.fiscal_zone = Time.fiscal_zone = old_fiscal_zone
+  end
+```
+
 ## Date or Time Class Methods
 
 ### Fiscal Zone and FY Start Month
