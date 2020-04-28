@@ -205,4 +205,18 @@ describe "fiscali" do
       end
     end
   end
+
+  context 'all_* methods' do
+    it 'returns a range of the entire financial period' do
+      date = Date.today
+      range = date.all_financial_quarter
+      expect(range.first).to eql(date.beginning_of_financial_quarter)
+      expect(range.last).to eql(date.end_of_financial_quarter)
+
+      range = date.all_financial_year
+
+      expect(range.first).to eql(date.beginning_of_financial_year)
+      expect(range.last).to eql(date.end_of_financial_year)
+    end
+  end
 end
