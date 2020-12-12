@@ -219,6 +219,8 @@ Since 1st Jan 2009 in India falls in the 2008-09 financial year
 * [@chiperific](https://github.com/chiperific)
 * [@rshallit](https://github.com/rshallit)
 * [@asanghi](https://github.com/asanghi)
+* [@maxwell](https://github.com/maxwell)
+* [@wubr](https://github.com/wubr)
 
 ## License
 
