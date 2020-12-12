@@ -55,9 +55,9 @@ describe "fiscali" do
       Date.fiscal_zone = :india
       Date.use_forward_year!
       this_year = Date.today.year
-      Date.financial_year_start.should eql(Date.new(this_year-1,4,1))
+      expect(Date.financial_year_start).to  eql(Date.new(this_year-1,4,1))
 
-      Date.financial_year_start(2009).should eql(Date.new(2008,4,1))
+      expect(Date.financial_year_start(2009)).to eql(Date.new(2008,4,1))
     end
   end
 
