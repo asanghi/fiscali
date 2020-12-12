@@ -1,3 +1,9 @@
+v2.4.0 (Unreleased)
+=======
+* Add Add all_financial_quarter and all_financial_year to match ActiveSupport (thx @maxwell)
+* Change financial_year_start to honor @fy_forward (thx @wubr)
+* update CI + tests
+
 v2.3.0
 =======
 
