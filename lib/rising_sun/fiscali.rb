@@ -117,6 +117,14 @@ module RisingSun
       beginning_of_financial_half.months_ago(6)
     end
 
+    def all_financial_quarter
+      beginning_of_financial_quarter..end_of_financial_quarter
+    end
+
+    def all_financial_year
+      beginning_of_financial_year..end_of_financial_year
+    end
+
     def financial_month_of(month)
       if month < start_month
         Date.new(year+1,month,1)
