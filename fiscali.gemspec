@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.name          = "fiscali"
   gem.version       = RisingSun::Fiscali::VERSION
   gem.authors       = ["Aditya Sanghi"]
-  gem.email         = ["asanghi@me.com"]
+  gem.email         = ["asanghi@hey.com"]
   gem.description   = %q{Fiscal Year Date Functions}
   gem.summary       = %q{Fiscal Year Date Functions}
   gem.homepage      = "https://github.com/asanghi/fiscali"
