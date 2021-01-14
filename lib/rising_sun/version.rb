@@ -1,5 +1,5 @@
 module RisingSun
   module Fiscali
-    VERSION = "2.4.3"
+    VERSION = "2.4.4"
   end
 end
